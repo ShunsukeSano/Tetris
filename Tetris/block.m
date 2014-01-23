@@ -459,6 +459,7 @@
 
 -(void)deleteLine
 {
+    while(YES){
     lineNumber = [self checkLine];
     if(lineNumber < HEIGHT){
         for(int j=1;j<WIDTH-1;j++){
@@ -479,6 +480,9 @@
         for(int j=1;j<WIDTH-1;j++){
             display[0][j] = 0;
         }
+    }else{
+        break;
+    }
     }
 }
 

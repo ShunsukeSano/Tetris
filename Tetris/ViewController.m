@@ -18,8 +18,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    holdButtom.enabled = NO;
     m_block = [[block alloc]init];
-
     [m_block randomBlock];
     [m_block fieldInit];
     [m_block displayInit];
@@ -51,6 +51,9 @@
     nextImg.frame = CGRectMake(0, 0, 110, 75);
     holdImg.frame = CGRectMake(0, 0, 110, 75);
 //NEXTとHOLDの初期化end
+    timer = [CADisplayLink displayLinkWithTarget:self selector:@selector(loopDownBlock)];
+    [timer setFrameInterval:20];
+    [timer addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 }
 
 
@@ -58,6 +61,48 @@
 {
     [super didReceiveMemoryWarning];
 }
+
+-(void)loopDownBlock{
+        if([m_block checkUnderBlock] == 1){
+            [m_block moveUnderBlock];
+        }else{
+            [m_block copyDisplay];
+            if([m_block checkGameOver] == 1){
+                [[self gameOverLabel] setText:@"GAMEOVER"];
+                holdButtom.enabled = NO;
+                spinLeftButtom.enabled = NO;
+                spinRightButtom.enabled = NO;
+                upButtom.enabled = NO;
+                leftButtom.enabled = NO;
+                rightButtom.enabled = NO;
+                downButtom.enabled = NO;
+                return;
+            }
+            
+            [m_block deleteLine];
+            [m_block flowBlock];
+            [m_block createBlock];
+            [m_block drawBlock];
+            for(int i=0;i<HEIGHT;i++){
+                for(int j=0;j<WIDTH;j++){
+                    [self.disp addSubview:img[i][j]];
+                }
+            }
+            [m_block drawNextBlock];
+            [self.nextLabel addSubview:nextImg];
+            holdButtom.enabled = YES;
+        }
+    [m_block drawBlock];
+    for(int i=0;i<HEIGHT-2;i++){
+        for(int j=1;j<WIDTH-1;j++){
+            [self.disp addSubview:img[i][j]];
+        }
+    }
+
+    
+}
+
+
 
 - (IBAction)holdButtom:(id)sender {
     [m_block holdBlock];
@@ -139,7 +184,7 @@
             [m_block drawNextBlock];
             [self.nextLabel addSubview:nextImg];
             holdButtom.enabled = YES;
-                    }
+        }
     }
     [m_block drawBlock];
     for(int i=0;i<HEIGHT-2;i++){
@@ -150,6 +195,7 @@
 }
 
 - (IBAction)startButtom:(id)sender {
+    holdButtom.enabled = YES;
     [m_block flowBlock];
     [m_block createBlock];
     [m_block drawBlock];

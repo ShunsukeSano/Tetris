@@ -10,6 +10,7 @@
 //#import "ViewController.h"
 #define WIDTH 12
 #define HEIGHT 27
+#define COUNT 10
 
 @interface block : NSObject
 {

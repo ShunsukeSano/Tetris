@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "block.h"
+#import <QuartzCore/QuartzCore.h>
+
 #define WIDTH 12
 #define HEIGHT 27
 UIImageView *img[HEIGHT][WIDTH];
@@ -25,6 +27,7 @@ UIImageView *holdImg;
     IBOutlet UIButton *rightButtom;
     IBOutlet UIButton *downButtom;
     block* m_block;
+    CADisplayLink *timer;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *disp;
@@ -34,6 +37,8 @@ UIImageView *holdImg;
 @property (weak, nonatomic) IBOutlet UILabel *nextLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *gameOverLabel;
+
+@property(nonatomic) NSInteger frameInterval;
 
 
 - (IBAction)holdButtom:(id)sender;

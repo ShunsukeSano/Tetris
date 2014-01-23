@@ -40,6 +40,7 @@
 		EC99EEAD185AA55000662067 /* block2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC99EEA9185AA55000662067 /* block2.jpg */; };
 		EC99EEB1185AA56000662067 /* block6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC99EEAF185AA56000662067 /* block6.jpg */; };
 		EC99EEB5185AC1A700662067 /* resize.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC99EEB4185AC1A700662067 /* resize.jpg */; };
+		ECF20E2A1890EE3A005F21CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECF20E291890EE3A005F21CB /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		EC99EEA9185AA55000662067 /* block2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = block2.jpg; sourceTree = "<group>"; };
 		EC99EEAF185AA56000662067 /* block6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = block6.jpg; sourceTree = "<group>"; };
 		EC99EEB4185AC1A700662067 /* resize.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = resize.jpg; sourceTree = "<group>"; };
+		ECF20E291890EE3A005F21CB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECF20E2A1890EE3A005F21CB /* QuartzCore.framework in Frameworks */,
 				EC02E2D818598A0900246512 /* UIKit.framework in Frameworks */,
 				EC02E2DA18598A0900246512 /* Foundation.framework in Frameworks */,
 				EC02E2DC18598A0900246512 /* CoreGraphics.framework in Frameworks */,
@@ -122,6 +125,7 @@
 		EC02E2CB18598A0900246512 = {
 			isa = PBXGroup;
 			children = (
+				ECF20E291890EE3A005F21CB /* QuartzCore.framework */,
 				EC02E2DD18598A0900246512 /* Tetris */,
 				EC02E30118598A0A00246512 /* TetrisTests */,
 				EC02E2D618598A0900246512 /* Frameworks */,
