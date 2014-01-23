@@ -19,7 +19,7 @@
 {
     [super viewDidLoad];
     m_block = [[block alloc]init];
-    //初期化
+
     [m_block randomBlock];
     [m_block fieldInit];
     [m_block displayInit];
