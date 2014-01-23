@@ -7,7 +7,45 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "block.h"
+#define WIDTH 12
+#define HEIGHT 27
+UIImageView *img[HEIGHT][WIDTH];
+UIImageView *nextImg;
+UIImageView *holdImg;
 
-@interface ViewController : UIViewController
+
+@interface ViewController : UIViewController{
+    IBOutlet UIButton *startButtom;
+    IBOutlet UIButton *holdButtom;
+    IBOutlet UIButton *spinLeftButtom;
+    IBOutlet UIButton *spinRightButtom;
+    IBOutlet UIButton *upButtom;
+    IBOutlet UIButton *leftButtom;
+    IBOutlet UIButton *rightButtom;
+    IBOutlet UIButton *downButtom;
+    block* m_block;
+}
+
+@property (weak, nonatomic) IBOutlet UILabel *disp;
+
+@property (weak, nonatomic) IBOutlet UILabel *holdLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *nextLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *gameOverLabel;
+
+
+- (IBAction)holdButtom:(id)sender;
+
+- (IBAction)spinButtom:(id)sender;
+
+- (IBAction)rigthLeftButtom:(id)sender;
+
+- (IBAction)upDownButtom:(id)sender;
+
+- (IBAction)startButtom:(id)sender;
+
+@property enum {holdButtom} state;
 
 @end
