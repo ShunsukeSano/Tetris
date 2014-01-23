@@ -19,10 +19,12 @@
 {
     [super viewDidLoad];
     m_block = [[block alloc]init];
+    //初期化
     [m_block randomBlock];
     [m_block fieldInit];
     [m_block displayInit];
     [m_block tempInit];
+
 
 //盤面の作成
     for(int i=0;i<HEIGHT;i++){
