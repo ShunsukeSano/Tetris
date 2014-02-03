@@ -51,9 +51,12 @@
     nextImg.frame = CGRectMake(0, 0, 110, 75);
     holdImg.frame = CGRectMake(0, 0, 110, 75);
 //NEXTとHOLDの初期化end
+
+//アニメーション設定  指定した関数のみ無限ループ
     timer = [CADisplayLink displayLinkWithTarget:self selector:@selector(loopDownBlock)];
-    [timer setFrameInterval:20];
+    [timer setFrameInterval:20];  //ループ間隔
     [timer addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+//アニメーション設定end
 }
 
 
@@ -62,14 +65,15 @@
     [super didReceiveMemoryWarning];
 }
 
+//ループされる関数
 -(void)loopDownBlock{
-        if([m_block checkUnderBlock] == 1){
-            [m_block moveUnderBlock];
-        }else{
-            [m_block copyDisplay];
-            if([m_block checkGameOver] == 1){
-                [[self gameOverLabel] setText:@"GAMEOVER"];
-                holdButtom.enabled = NO;
+        if([m_block checkUnderBlock] == 1){  //下に移動できるなら
+            [m_block moveUnderBlock];        //下に移動
+        }else{                               //できないなら
+            [m_block copyDisplay];           //落下中から落下済みへ
+            if([m_block checkGameOver] == 1){   //ゲームオーバーかどうか
+                [[self gameOverLabel] setText:@"GAMEOVER"];  //GAMEOVERの表示
+                holdButtom.enabled = NO;         //全ボタンを効かなくする
                 spinLeftButtom.enabled = NO;
                 spinRightButtom.enabled = NO;
                 upButtom.enabled = NO;
@@ -79,16 +83,16 @@
                 return;
             }
             
-            [m_block deleteLine];
-            [m_block flowBlock];
+            [m_block deleteLine];   //行の消去
+            [m_block flowBlock];    //ブロックの遷移
             [m_block createBlock];
-            [m_block drawBlock];
+            [m_block drawBlock];     //ブロック描画
             for(int i=0;i<HEIGHT;i++){
                 for(int j=0;j<WIDTH;j++){
                     [self.disp addSubview:img[i][j]];
                 }
             }
-            [m_block drawNextBlock];
+            [m_block drawNextBlock];   //次ブロック描画
             [self.nextLabel addSubview:nextImg];
             holdButtom.enabled = YES;
         }
@@ -105,28 +109,30 @@
 
 
 - (IBAction)holdButtom:(id)sender {
-    [m_block holdBlock];
-    [m_block drawHoldBlock];
+    [m_block holdBlock];   //ホールド処理
+    [m_block drawHoldBlock];   //ホールドブロックの描画
     [self.holdLabel addSubview:holdImg];
-    [m_block drawBlock];
+    [m_block drawNextBlock];   //次ブロック描画
+    [self.nextLabel addSubview:nextImg];
+    [m_block drawBlock];    //ブロックの描画
     for(int i=0;i<HEIGHT;i++){
         for(int j=0;j<WIDTH;j++){
             [self.disp addSubview:img[i][j]];
         }
     }
-     holdButtom.enabled = NO;
+     holdButtom.enabled = NO;   //ホールドボタンの使用は1落下につき1回
 }
 
 - (IBAction)spinButtom:(id)sender {
     UIButton *b = (UIButton *)sender;
-    if(b.tag == 0){//Lが押されたら左回転
-        if([m_block checkSpinRightBlock] == 1)
-            [m_block spinRightBlock];
-    }else{//Lが押されたら左回転
-        if([m_block checkSpinLeftBlock] == 1)
-        [m_block spinLeftBlock];
+    if(b.tag == 0){//Rが押された
+        if([m_block checkSpinRightBlock] == 1)  //右回転できるなら
+            [m_block spinRightBlock];           //右回転
+    }else{//Lが押された
+        if([m_block checkSpinLeftBlock] == 1)   //左回転できるなら
+        [m_block spinLeftBlock];                //左回転
     }    
-    [m_block drawBlock];
+    [m_block drawBlock];          //ブロックの描画
     for(int i=0;i<HEIGHT;i++){
         for(int j=0;j<WIDTH;j++){
             [self.disp addSubview:img[i][j]];
@@ -137,15 +143,15 @@
 - (IBAction)rigthLeftButtom:(id)sender {
     UIButton *b = (UIButton *)sender;
     if(b.tag == 0){  //右が押された
-        if([m_block checkRightBlock] == 1){
-            [m_block moveRightBlock];
+        if([m_block checkRightBlock] == 1){    //右に移動できるなら
+            [m_block moveRightBlock];          //右へ移動
         }
     }else{   //左が押された
-        if([m_block checkLeftBlock] == 1){
-            [m_block moveLeftBlock];
+        if([m_block checkLeftBlock] == 1){     //左へ移動できるなら
+            [m_block moveLeftBlock];           //左へ移動
         }
     }
-    [m_block drawBlock];
+    [m_block drawBlock];         //ブロックの描画
     for(int i=0;i<HEIGHT-2;i++){
         for(int j=1;j<WIDTH-1;j++){
             [self.disp addSubview:img[i][j]];
@@ -193,6 +199,7 @@
         }
     }
 }
+
 
 - (IBAction)startButtom:(id)sender {
     holdButtom.enabled = YES;
